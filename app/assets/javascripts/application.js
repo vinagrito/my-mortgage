@@ -12,5 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
+//= require bootstrap
+//= require bootstrap-material-design
+//= require react
+//= require react_ujs
+//= require bootstrap
+//= require_tree ./components
 //= require_tree .
