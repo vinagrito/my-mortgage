@@ -15,3 +15,4 @@
           className: "form-control floating-label"
           type: "text"
           placeholder: @props.placeholder
+          defaultValue: @props.value

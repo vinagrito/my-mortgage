@@ -1,21 +1,14 @@
 @LaneList = React.createClass
-  render: ->
-    lanes = for i in [0...@props.laneCount]
-      `<Lane key={i} />`
+  getInitialState: ->
+    lanes: @props.lanes
 
-    `<table className="table table-striped table-hover">
-      <thead>
-        <tr>
-          <th className="col-lg-3"></th>
-          <th className="col-lg-2"></th>
-          <th className="col-lg-1"></th>
-          <th className="col-lg-2"></th>
-          <th className="col-lg-1"></th>
-          <th className="col-lg-1"></th>
-          <th className="col-lg-1"></th>
-        </tr>
-      </thead>
-      <tbody>
-        { lanes }
-      </tbody>
-    </table>`
+  handleRemoveLane: (lane)->
+    @props.onRemoveClick(lane)
+
+  render: ->
+    lanes = for lane in @props.lanes
+      `<Lane key={lane.id} lane={lane} onRemove={this.handleRemoveLane} />`
+
+    `<tbody>
+      { lanes }
+    </tbody>`

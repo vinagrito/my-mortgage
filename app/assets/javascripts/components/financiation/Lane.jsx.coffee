@@ -1,6 +1,10 @@
 @Lane = React.createClass
+  clickDelete: ->
+    this.props.onRemove(@props.lane)
+
   render: ->
-    lineHeightCss = { "line-height": "0" }
+    lineHeightCss = { "lineHeight": "0" }
+    lane = @props.lane
 
     `<tr>
       <td>
@@ -19,15 +23,15 @@
       </td>
 
       <td>
-        <LaneTextInput addon="₪" placeholder="Amount" />
+        <LaneTextInput addon="₪" placeholder="Amount" value={lane.amount} />
       </td>
 
       <td>
-        <LaneTextInput addon="%" placeholder="Rate" />
+        <LaneTextInput addon="%" placeholder="Rate" value={lane.rate}/>
       </td>
 
       <td>
-        <LaneTextInput addon="₪" placeholder="Return (monthly)" />
+        <LaneTextInput addon="₪" placeholder="Return (monthly)"/>
       </td>
 
       <td>
@@ -43,7 +47,7 @@
       </td>
 
       <td>
-        <a href="javascript:void(0)" className="btn btn-flat btn-danger" style={lineHeightCss}>
+        <a className="btn btn-flat btn-danger" style={lineHeightCss} onClick={this.clickDelete}>
           <i className="mdi-action-delete" style={lineHeightCss}></i>
         </a>
       </td>
