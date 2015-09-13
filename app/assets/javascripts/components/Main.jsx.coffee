@@ -13,7 +13,7 @@
       <a className="btn btn-flat btn-success" onClick={this.addLane}>+ Add Lane</a>
 
       <div className="row">
-        <div className="col-lg-8">
+        <div className="col-lg-10">
           <LaneList laneCount={this.state.laneCount} />
         </div>
       </div>

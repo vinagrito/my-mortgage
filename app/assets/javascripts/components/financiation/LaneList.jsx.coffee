@@ -6,13 +6,13 @@
     `<table className="table table-striped table-hover">
       <thead>
         <tr>
-          <th>#</th>
-          <th>Type</th>
-          <th>Amount</th>
-          <th>Interest</th>
-          <th>Monthly payment</th>
-          <th>Term (years)</th>
-          <th>Total return</th>
+          <th className="col-lg-3"></th>
+          <th className="col-lg-2"></th>
+          <th className="col-lg-1"></th>
+          <th className="col-lg-2"></th>
+          <th className="col-lg-1"></th>
+          <th className="col-lg-1"></th>
+          <th className="col-lg-1"></th>
         </tr>
       </thead>
       <tbody>
