@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require sugar
 //= require bootstrap
 //= require bootstrap-material-design
 //= require react

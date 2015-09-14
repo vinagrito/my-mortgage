@@ -4,14 +4,14 @@
   getInitialState: ->
     laneCount: 0
     lanes: [
-      { id: -1, modality: "Prime", amount: 333000, rate: 2 },
-      { id: -2, modality: "Ogen", amount: 333000, rate: 2.5 },
+      { id: -1, modality: "Prime", amount: 333000, rate: 2, monthReturn: 0, bankGain: 0 },
+      { id: -2, modality: "Ogen", amount: 333000, rate: 2.5, monthReturn: 0, bankGain: 0 },
     ]
 
   addLane: ->
     lanes = this.state.lanes
     lastLane = lanes[lanes.length - 1]
-    newLane = { id: lastLane.id - 1, modality: "", amount: 333000, rate: 0 }
+    newLane = { id: lastLane.id - 1, modality: "", amount: 333000, rate: 0, monthReturn: 0, bankGain: 0 }
     lanes.push(newLane)
     @setState lanes: lanes
 

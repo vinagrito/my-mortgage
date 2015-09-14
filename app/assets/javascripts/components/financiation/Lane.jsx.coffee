@@ -1,10 +1,22 @@
 @Lane = React.createClass
+  getInitialState: ->
+    @props.lane
+
   clickDelete: ->
-    this.props.onRemove(@props.lane)
+    @props.onRemove(@props.lane)
+
+  valueChange: (field) ->
+    newValue = @refs[field].refs[field].getDOMNode().value
+    @setState "#{field}": newValue
+    @props.updateTotal(@props.lane.id, {"#{field}": newValue})
 
   render: ->
     lineHeightCss = { "lineHeight": "0" }
-    lane = @props.lane
+
+    modality = this.state.modality
+    amount = this.state.amount
+    rate = this.state.rate
+    monthReturn = this.state.monthReturn
 
     `<tr>
       <td>
@@ -23,32 +35,30 @@
       </td>
 
       <td>
-        <LaneTextInput addon="₪" placeholder="Amount" value={lane.amount} />
+        <LaneTextInput ref="amount" childRef="amount" addon="₪" placeholder="Amount" value={amount} valueChange={this.valueChange} />
       </td>
 
       <td>
-        <LaneTextInput addon="%" placeholder="Rate" value={lane.rate}/>
+        <LaneTextInput ref="rate" childRef="rate" addon="%" placeholder="Rate" value={rate} />
       </td>
 
       <td>
-        <LaneTextInput addon="₪" placeholder="Return (monthly)"/>
+        <LaneTextInput ref="monthReturn" childRef="monthReturn" addon="₪" placeholder="Return (monthly)" value={monthReturn} valueChange={this.valueChange}/>
       </td>
 
       <td>
-        <div className="form-group">
+        <div className="form-group" >
           <input className="form-control floating-label" type="text" placeholder="Years"  />
         </div>
       </td>
 
       <td>
-        <div className="form-group">
-          <input className="form-control" id="disabledInput" type="text" disabled="disabled" placeholder="Bank gets" />
-        </div>
+        <LaneTextInput ref="bankGain" childRef="bankGain" addon="₪" placeholder="Bank gets" disabled="disabled" />
       </td>
 
       <td>
-        <a className="btn btn-flat btn-danger" style={lineHeightCss} onClick={this.clickDelete}>
+        <div className="btn btn-flat btn-danger" style={lineHeightCss} onClick={this.clickDelete}>
           <i className="mdi-action-delete" style={lineHeightCss}></i>
-        </a>
+        </div>
       </td>
     </tr>`
