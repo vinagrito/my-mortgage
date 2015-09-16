@@ -17,9 +17,10 @@
     amount = this.state.amount
     rate = this.state.rate
     monthReturn = this.state.monthReturn
+    years = this.state.years
 
     `<tr>
-      <td>
+      <td className="col-lg-3">
         <div className="form-group">
           <div>
             <select className="form-control" id="select">
@@ -34,25 +35,24 @@
         </div>
       </td>
 
-      <td>
+      <td className="col-lg-2">
         <LaneTextInput ref="amount" childRef="amount" addon="₪" placeholder="Amount" value={amount} valueChange={this.valueChange} />
       </td>
 
-      <td>
+      <td className="col-lg-1">
         <LaneTextInput ref="rate" childRef="rate" addon="%" placeholder="Rate" value={rate} />
       </td>
 
-      <td>
-        <LaneTextInput ref="monthReturn" childRef="monthReturn" addon="₪" placeholder="Return (monthly)" value={monthReturn} valueChange={this.valueChange}/>
+      <td style={{"width": "200px"}}>
+        <LaneTextInput ref="monthReturn" childRef="monthReturn" addon="₪"
+          placeholder="Return (monthly)" value={monthReturn} valueChange={this.valueChange} />
       </td>
 
-      <td>
-        <div className="form-group" >
-          <input className="form-control floating-label" type="text" placeholder="Years"  />
-        </div>
+      <td className="col-lg-1">
+        <LaneTextInput ref="years" childRef="years" placeholder="Years" value={years}  />
       </td>
 
-      <td>
+      <td className="col-lg-2">
         <LaneTextInput ref="bankGain" childRef="bankGain" addon="₪" placeholder="Bank gets" disabled="disabled" />
       </td>
 
