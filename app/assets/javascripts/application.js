@@ -13,10 +13,9 @@
 //= require jquery
 //= require jquery_ujs
 //= require sugar
-//= require bootstrap
-//= require bootstrap-material-design
 //= require react
 //= require react_ujs
-//= require bootstrap
+//= require bootstrap-sprockets
+//= require bootstrap-material-design
 //= require_tree ./components
 //= require_tree .
