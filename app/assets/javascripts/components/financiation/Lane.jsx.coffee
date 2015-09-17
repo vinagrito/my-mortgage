@@ -5,19 +5,27 @@
   clickDelete: ->
     @props.onRemove(@props.lane)
 
-  valueChange: (field) ->
-    newValue = @refs[field].refs[field].getDOMNode().value
-    @setState "#{field}": newValue
-    @props.updateTotal(@props.lane.id, {"#{field}": newValue})
+  updateMonthReturn: ->
+    rate = @state.rate / 100
+    monthReturn = ((rate / 12) * @state.amount) / (1 - (Math.pow((1 + (rate / 12)), (-@state.years * 12))))
+    Math.round(monthReturn * 100) / 100
+
+  valueChange: (field, newValue) ->
+    @props.updateLane(@props.lane.id, {"#{field}": newValue})
+
+  bankGain: ->
+    gain = @updateMonthReturn() * @state.years * 12
+    Math.round(gain * 100) / 100
 
   render: ->
     lineHeightCss = { "lineHeight": "0" }
 
-    modality = this.state.modality
-    amount = this.state.amount
-    rate = this.state.rate
-    monthReturn = this.state.monthReturn
-    years = this.state.years
+    modality = @state.modality
+    amount = @state.amount
+    rate = @state.rate
+    monthReturn = @updateMonthReturn()
+    years = @state.years
+    bankGain = @bankGain()
 
     `<tr>
       <td className="col-lg-3">
@@ -36,24 +44,24 @@
       </td>
 
       <td className="col-lg-2">
-        <LaneTextInput ref="amount" childRef="amount" addon="₪" placeholder="Amount" value={amount} valueChange={this.valueChange} />
+        <LaneTextInput addon="₪" placeholder="Amount" value={amount} valueChange={this.valueChange} />
       </td>
 
       <td className="col-lg-1">
-        <LaneTextInput ref="rate" childRef="rate" addon="%" placeholder="Rate" value={rate} />
+        <LaneTextInput ref="rate" childRef="rate" addon="%" placeholder="Rate" value={rate} valueChange={this.valueChange} />
       </td>
 
-      <td style={{"width": "200px"}}>
+      <td>
         <LaneTextInput ref="monthReturn" childRef="monthReturn" addon="₪"
-          placeholder="Return (monthly)" value={monthReturn} valueChange={this.valueChange} />
+          placeholder="Return (monthly)" value={monthReturn} valueChange={this.valueChange}/>
       </td>
 
       <td className="col-lg-1">
-        <LaneTextInput ref="years" childRef="years" placeholder="Years" value={years}  />
+        <LaneTextInput ref="years" childRef="years" placeholder="Years" value={years} valueChange={this.valueChange} />
       </td>
 
       <td className="col-lg-2">
-        <LaneTextInput ref="bankGain" childRef="bankGain" addon="₪" placeholder="Bank gets" disabled="disabled" />
+        <LaneTextInput ref="bankGain" childRef="bankGain" addon="₪" placeholder="Bank gets" disabled="disabled" value={bankGain}/>
       </td>
 
       <td>

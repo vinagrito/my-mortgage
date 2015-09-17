@@ -7,9 +7,15 @@
     @props.onRemoveClick(lane)
 
   updateLane: (laneID, value) ->
-    currentLane = @state.lanes.find (lane) -> lane.id is laneID
-    $.extend(currentLane, value)
+    lanes = @state.lanes
+    currentLane = lanes.find (lane) -> lane.id is laneID
+    laneIndex = lanes.indexOf(currentLane)
 
+    lanes.splice(laneIndex, 1)
+    $.extend(currentLane, value)
+    lanes.splice(laneIndex, 0, currentLane)
+
+    @setState lanes: lanes
     @updateTotalFinanciation()
 
   updateTotalFinanciation: ->
@@ -25,7 +31,7 @@
 
   render: ->
     lanes = for lane in @props.lanes
-      `<Lane key={lane.id} lane={lane} onRemove={this.handleRemoveLane} updateTotal={this.updateLane}/>`
+      `<Lane key={lane.id} lane={lane} onRemove={this.handleRemoveLane} updateLane={this.updateLane}/>`
 
     `<tbody>
       { lanes }
