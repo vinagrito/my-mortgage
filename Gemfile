@@ -27,6 +27,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bootstrap-sass', '~> 3.3.0.1'
 
 gem 'react-rails', '~> 1.0'
+gem 'sprockets-coffee-react'
 
 gem 'bootstrap-material-design'
 

@@ -1,33 +1,23 @@
 @Lane = React.createClass
-  getInitialState: ->
-    @props.lane
-
   clickDelete: ->
-    @props.onRemove(@props.lane)
-
-  updateMonthReturn: ->
-    rate = @state.rate / 100
-    monthReturn = ((rate / 12) * @state.amount) / (1 - (Math.pow((1 + (rate / 12)), (-@state.years * 12))))
-    Math.round(monthReturn * 100) / 100
+    @props.removeLane(@props.lane)
 
   valueChange: (field, newValue) ->
-    @props.updateLane(@props.lane.id, {"#{field}": newValue})
-
-  bankGain: ->
-    gain = @updateMonthReturn() * @state.years * 12
-    Math.round(gain * 100) / 100
+    @props.updateLane(@props.lane.id, {"#{field}": newValue })
 
   render: ->
     lineHeightCss = { "lineHeight": "0" }
 
-    modality = @state.modality
-    amount = @state.amount
-    rate = @state.rate
-    monthReturn = @updateMonthReturn()
-    years = @state.years
-    bankGain = @bankGain()
+    lane = @props.lane
 
-    `<tr>
+    modality = lane.modality
+    amount = lane.amount
+    rate = lane.rate
+    monthReturn = lane.monthReturn
+    years = lane.years
+    bankGain = lane.bankGain
+
+    <tr>
       <td className="col-lg-3">
         <div className="form-group">
           <div>
@@ -44,29 +34,29 @@
       </td>
 
       <td className="col-lg-2">
-        <LaneTextInput addon="₪" placeholder="Amount" value={amount} valueChange={this.valueChange} />
+        <LaneTextInput addon="₪" childRef="amount" placeholder="Amount" value={amount} valueChange={@valueChange} />
       </td>
 
       <td className="col-lg-1">
-        <LaneTextInput ref="rate" childRef="rate" addon="%" placeholder="Rate" value={rate} valueChange={this.valueChange} />
+        <LaneTextInput ref="rate" childRef="rate" addon="%" placeholder="Rate" value={rate} valueChange={@valueChange} />
       </td>
 
       <td>
-        <LaneTextInput ref="monthReturn" childRef="monthReturn" addon="₪"
-          placeholder="Return (monthly)" value={monthReturn} valueChange={this.valueChange}/>
+        <LaneTextInput childRef="monthReturn" addon="₪" placeholder="Return (monthly)"
+          value={monthReturn} valueChange={@valueChange}/>
       </td>
 
       <td className="col-lg-1">
-        <LaneTextInput ref="years" childRef="years" placeholder="Years" value={years} valueChange={this.valueChange} />
+        <LaneTextInput childRef="years" placeholder="Years" value={years} valueChange={@valueChange} />
       </td>
 
       <td className="col-lg-2">
-        <LaneTextInput ref="bankGain" childRef="bankGain" addon="₪" placeholder="Bank gets" disabled="disabled" value={bankGain}/>
+        <LaneTextInput childRef="bankGain" addon="₪" placeholder="Bank gets" disabled="disabled" value={bankGain}/>
       </td>
 
       <td>
-        <div className="btn btn-flat btn-danger" style={lineHeightCss} onClick={this.clickDelete}>
+        <div className="btn btn-flat btn-danger" style={lineHeightCss} onClick={@clickDelete}>
           <i className="mdi-action-delete" style={lineHeightCss}></i>
         </div>
       </td>
-    </tr>`
+    </tr>

@@ -1,8 +1,8 @@
 @TotalFinanciation = React.createClass
   render: ->
-    total = this.props.total
+    total = @props.total
 
-    `<tr>
+    <tr>
       <td />
 
       <td>
@@ -22,4 +22,4 @@
       </td>
 
       <td />
-    </tr>`
+    </tr>
