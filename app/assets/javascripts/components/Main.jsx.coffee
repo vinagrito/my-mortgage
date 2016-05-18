@@ -49,6 +49,7 @@
 
     lanes.splice(laneIndex, 0, currentLane)
 
+    # @saveFinanciation(lanes)
     @setState lanes: lanes
     @totalFinanciation(lanes)
 
@@ -63,30 +64,51 @@
 
     @setState total: total
 
+  saveFinanciation: (lanes) ->
+    # debugger
+    # serialized_lanes = $("input").serialize()
+    # $.post "/financiations", serialized_lanes, (data) =>
+    #   # @props.handleNewRecord data
+    #   # @setState @getInitialState()
+    #   console.log "should save"
+    #   @setState lanes: lanes
+    #   @totalFinanciation(lanes)
+    # , "JSON"
+
   render: ->
     <div>
-      <a className="btn btn-flat btn-success" onClick={@addLane}>+ Add Lane</a>
+      <a className="btn btn-flat btn-info" onClick={@addLane}>+ Add Lane</a>
+
 
       <div className="row">
         <div className="col-lg-12">
-          <table className="table table-striped table-hover">
-            <thead>
-              <th>Modality</th>
-              <th>Amount</th>
-              <th>Rate</th>
-              <th>Return (monthly)</th>
-              <th>Years</th>
-              <th>Total return</th>
-              <th></th>
-            </thead>
-            <LaneList lanes={@state.lanes} updateLane={@handleLaneChange} removeLane={@handleLaneRemove}/>
-            {
-              if @state.lanes.length > 0
-                <tbody>
-                  <TotalFinanciation total={@state.total} />
-                </tbody>
-            }
-          </table>
+          <form onSubmit={@saveFinanciation}>
+            <table className="table table-striped table-hover">
+              <thead>
+                <th>Modality</th>
+                <th>Amount</th>
+                <th>Rate</th>
+                <th>Return (monthly)</th>
+                <th>Years</th>
+                <th>Total return</th>
+                <th></th>
+              </thead>
+
+              <LaneList
+                lanes={@state.lanes}
+                updateLane={@handleLaneChange}
+                removeLane={@handleLaneRemove}
+                handleSave={@saveFinanciation}>
+              </LaneList>
+
+              {
+                if @state.lanes.length > 0
+                  <tbody>
+                    <TotalFinanciation total={@state.total} />
+                  </tbody>
+              }
+            </table>
+          </form>
         </div>
       </div>
     </div>

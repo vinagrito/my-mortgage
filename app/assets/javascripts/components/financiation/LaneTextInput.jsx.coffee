@@ -17,6 +17,7 @@
 
         React.DOM.input
           id: "focusedInput"
+          name: "financiation[lane_attributes][][#{@props.placeholder}]"
           className: "form-control floating-label"
           type: "text"
           placeholder: @props.placeholder

@@ -6,4 +6,3 @@
     <tbody>
       { lanes }
     </tbody>
-
